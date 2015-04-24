@@ -6,6 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using EFWorkshop.Domain;
+using EFWorkshop.Dto;
 
 namespace EFWorkshop
 {
@@ -13,6 +16,7 @@ namespace EFWorkshop
     {
         public static void Main(string[] args)
         {
+            CreateMappings();
             new EfWorkshopContext().Database.Initialize(false);
 
             Console.WriteLine("Enter option");
@@ -69,8 +73,12 @@ namespace EFWorkshop
                                  .Include(a => a.StudentClass)
                                  .FirstOrDefault();
 
-                Console.WriteLine("Name: " + student.Name);
-                Console.WriteLine("Class: " + student.StudentClass.Name);
+                var dto = new StudentDto();
+                
+                Mapper.Map(student, dto);
+
+                Console.WriteLine("Name: " + dto.Name);
+                Console.WriteLine("Class: " + dto.ClassName);
             }
         }
 
@@ -80,16 +88,22 @@ namespace EFWorkshop
             {
                 var student = ctx.Students
                                 .Where(s => s.Name.Equals("John Doe"))
-                                .Select(s => new
+                                .Select(s => new StudentDto
                                 {
-                                    StudentName = s.Name,
+                                    Name = s.Name,
                                     ClassName = s.StudentClass.Name
                                 })
                                 .FirstOrDefault();
 
-                Console.WriteLine("Name: " + student.StudentName);
+                Console.WriteLine("Name: " + student.Name);
                 Console.WriteLine("Class: " + student.ClassName);
             }
+        }
+
+        private static void CreateMappings()
+        {
+            Mapper.CreateMap<Student, StudentDto>()
+                .ForMember(d => d.ClassName, opt => opt.MapFrom(src => src.StudentClass.Name));
         }
     }
 }

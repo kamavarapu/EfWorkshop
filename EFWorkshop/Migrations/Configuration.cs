@@ -44,11 +44,25 @@ namespace EFWorkshop.Migrations
                 Id = 1,
                 Name = "Mathematics"
             };
+
+            var science = new Course
+            {
+                Id = 2,
+                Name = "Science"
+            };
+
+            var social = new Course
+            {
+                Id = 3,
+                Name = "Social"
+            };
             
             if (math.Students.FirstOrDefault(s => s.Id == firstStudent.Id) == null)
                 math.Students.Add(firstStudent);
             
             context.Courses.AddOrUpdate(math);
+            context.Courses.AddOrUpdate(science);
+            context.Courses.AddOrUpdate(social);
         }
     }
 }

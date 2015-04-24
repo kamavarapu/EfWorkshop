@@ -18,6 +18,7 @@ namespace EFWorkshop
             : base("EfWorkshopContext")
         {
             Database.SetInitializer(new NullDatabaseInitializer<EfWorkshopContext>());
+            //Database.Log = Console.WriteLine;
         }
 
         public DbSet<Student> Students { get; set; }
