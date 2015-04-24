@@ -54,6 +54,7 @@
     <Compile Include="Domain\Student.cs" />
     <Compile Include="Domain\StudentClass.cs" />
     <Compile Include="EfWorkshopContext.cs" />
+    <Compile Include="EfWorkshopContext.Views.cs" />
     <Compile Include="Map\AddressMap.cs" />
     <Compile Include="Map\StudentMap.cs" />
     <Compile Include="Migrations\201504241400568_AddStudent.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkshopConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

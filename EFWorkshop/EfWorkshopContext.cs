@@ -11,6 +11,7 @@ using EFWorkshop.Map;
 
 namespace EFWorkshop
 {
+    [DbConfigurationType(typeof(WorkshopConfiguration))]
     public class EfWorkshopContext : DbContext
     {
         public EfWorkshopContext()

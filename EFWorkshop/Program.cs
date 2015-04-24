@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations.Edm;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace EFWorkshop
     {
         public static void Main(string[] args)
         {
+            new EfWorkshopContext().Database.Initialize(false);
+
             Console.WriteLine("Enter option");
             var key = Console.ReadKey();
             Console.WriteLine();
@@ -25,7 +28,18 @@ namespace EFWorkshop
                     EagerLoading();
                     break;
                 case ConsoleKey.C:
+                    var sw = new Stopwatch();
+                    sw.Start();
                     ExplicitLoading();
+                    sw.Stop();
+                    Console.WriteLine(sw.ElapsedMilliseconds);
+
+                    var sw1 = new Stopwatch();
+                    sw1.Start();
+                    ExplicitLoading();
+                    sw1.Stop();
+                    Console.WriteLine(sw1.ElapsedMilliseconds);
+
                     break;
                 default:
                     break;
